@@ -1,0 +1,427 @@
+:root {
+    --bs-primary: #004ac6;
+    --bs-primary-rgb: 0, 74, 198;
+
+    --surface: #faf8ff;
+    --surface-container: #ededf9;
+
+    --on-surface-variant: #434655;
+    --outline-variant: #c3c6d7;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--surface);
+    min-height: 100vh;
+}
+
+/* =========================================================
+   WRAPPER
+========================================================= */
+
+.login-wrapper {
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* =========================================================
+   LEFT PANEL
+========================================================= */
+
+.marketing-panel {
+    background-color: rgb(9 19 40);
+    position: relative;
+    overflow: hidden;
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 4rem;
+
+    min-height: 100vh;
+}
+
+.marketing-bg {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: .3;
+    mix-blend-mode: overlay;
+}
+
+.marketing-content {
+    position: relative;
+    z-index: 2;
+}
+
+.feature-card {
+    background: rgba(255,255,255,.12);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.18);
+
+    padding: 1.25rem;
+
+    border-radius: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
+
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 3rem 2rem;
+
+    background-color: var(--surface);
+
+    min-height: 100vh;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 460px;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.form-control-icon-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-control-icon-wrapper > i {
+    position: absolute;
+
+    left: 1rem;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #737686;
+
+    z-index: 5;
+}
+
+.form-control {
+    height: 56px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--outline-variant);
+
+    background: #fff;
+
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+
+    font-size: .95rem;
+
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary);
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.password-toggle {
+    position: absolute;
+
+    right: 1rem;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #737686;
+
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.password-toggle i{
+    font-size: .95rem;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+
+    padding: .9rem 1rem;
+
+    font-weight: 600;
+
+    border-radius: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #00389a;
+    border-color: #00389a;
+}
+
+.btn-outline-secondary {
+    border-color: var(--outline-variant);
+
+    color: var(--on-surface-variant);
+
+    padding: .75rem;
+
+    border-radius: 16px;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--surface-container);
+    border-color: var(--outline-variant);
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.text-label {
+    font-size: .75rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .05em;
+
+    color: var(--on-surface-variant);
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a{
+    transition: .2s ease;
+}
+
+a:hover{
+    opacity: .8;
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.divider::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background: var(--outline-variant);
+
+    z-index: 1;
+}
+
+.divider span {
+    position: relative;
+
+    background: var(--surface);
+
+    padding: 0 1rem;
+
+    z-index: 2;
+
+    font-size: .75rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+    color: #737686;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding-bottom: 1rem;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1199px){
+
+    .marketing-panel{
+        padding: 3rem;
+    }
+
+    .login-panel{
+        padding: 2rem;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .marketing-panel {
+        display: none;
+    }
+
+    .login-panel {
+        min-height: 100vh;
+
+        padding: 1.5rem;
+    }
+
+    .login-form-container {
+        max-width: 100%;
+    }
+
+    .form-control{
+        height: 54px;
+    }
+
+    .btn-primary{
+        height: 54px;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 576px){
+
+    .login-panel{
+        padding: 1.25rem;
+    }
+
+    .login-form-container{
+        padding: 0;
+    }
+
+    h2{
+        font-size: 1.6rem;
+    }
+
+    .form-control{
+        font-size: .9rem;
+    }
+
+    footer{
+        margin-top: 2rem !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE FIX SPACING
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    body{
+        padding: 0;
+        margin: 0;
+    }
+
+    .container-fluid{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .login-wrapper{
+        width: 100%;
+        margin: 0;
+    }
+
+    .login-panel{
+        padding: 1.5rem !important;
+    }
+
+    .login-form-container{
+        width: 100%;
+        max-width: 100%;
+
+        background: white;
+
+        border-radius: 24px;
+
+        padding: 1.5rem;
+
+        box-shadow:
+            0 10px 30px rgba(0,0,0,.05);
+    }
+}
+
+/* =========================================================
+   EXTRA SMALL DEVICES
+========================================================= */
+
+@media (max-width: 576px){
+
+    .login-panel{
+        padding: 1rem !important;
+    }
+
+    .login-form-container{
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+}

@@ -80,14 +80,14 @@
                                     '{{ $sorteo->id }}',
                                     '{{ $sorteo->name }}',
                                     '{{ number_format($sorteo->price,2,'.','') }}',
-                                    '{{ asset('storage/' . str_replace('\\', '/', $sorteo->image)) }}'
+                                    '{{ asset('https://oxapremiostreff.com/storage/' . str_replace('\\', '/', $sorteo->image)) }}'
                                 )">
 
                                 <!-- IMAGE -->
                                 <div class="raffle-image">
 
                                     <img
-                                        src="{{ asset('storage/' . str_replace('\\', '/', $sorteo->image)) }}"
+                                        src="{{ asset('https://oxapremiostreff.com/storage/' . str_replace('\\', '/', $sorteo->image)) }}"
                                         alt="{{ $sorteo->name }}">
 
                                     <div class="raffle-overlay"></div>

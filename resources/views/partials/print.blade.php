@@ -95,6 +95,28 @@
             margin-top:8px;
         }
 
+        .ticket-number{
+
+            font-size:18px;
+
+            font-weight:700;
+
+            letter-spacing:2px;
+
+            padding:4px 0;
+
+        }
+
+        .ticket-list{
+
+            margin-top:8px;
+
+            border:1px dashed #000;
+
+            padding:8px;
+
+        }
+
     </style>
 
 </head>
@@ -123,9 +145,27 @@
 
     <div class="line"></div>
 
-    <!-- TICKET -->
-    <div class="center ticket-number">
-        {{ $ticket->ticket_number }}
+    <!-- NUMEROS DE TICKET -->
+    <div class="center">
+
+        <div class="bold">
+            NÚMEROS ASIGNADOS
+        </div>
+
+        <div class="ticket-list">
+
+            @for($i = 1; $i <= $ticket->cantidad; $i++)
+
+                {{ str_pad($ticket->id, 6, '0', STR_PAD_LEFT) . $i }}
+
+                @if($i < $ticket->cantidad)
+                    |
+                @endif
+
+            @endfor
+
+        </div>
+
     </div>
 
     <div class="line"></div>

@@ -150,4 +150,11 @@ class TicketController extends Controller
 
         return view('partials.print', compact('ticket'));
     }
+
+    public function reimprimir(Ticket $ticket)
+    {
+        $ticket->load('sorteo');
+
+        return view('partials.print', compact('ticket'));
+    }
 }

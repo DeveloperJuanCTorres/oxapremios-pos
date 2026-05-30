@@ -1,5 +1,25 @@
 @extends('layouts.app')
 <link href="{{ asset('css/vistas.css')}}?v=1993.0.1" rel="stylesheet" />
+<style>
+    .ticket-badge{
+        background: linear-gradient(135deg,#2563eb,#1d4ed8);
+        color:#fff;
+        padding:8px 14px;
+        border-radius:12px;
+        font-weight:700;
+        font-size:14px;
+        letter-spacing:.5px;
+        box-shadow:0 4px 10px rgba(37,99,235,.25);
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+    }
+
+    .ticket-badge i{
+        font-size:12px;
+        opacity:.8;
+    }
+</style>
 @section('content')
 
 @include('partials.menu')
@@ -140,11 +160,11 @@
                 <table class="table align-middle mb-0">
                     <thead>
                         <tr>
-                            <th class="px-4 py-3">Transaction ID</th>
-                            <th class="px-4 py-3">Time</th>
-                            <th class="px-4 py-3">Total Amount</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3 text-end">Actions</th>
+                            <th class="px-4 py-3">Transacción ID</th>
+                            <th class="px-4 py-3">Hora</th>
+                            <th class="px-4 py-3">Total</th>
+                            <th class="px-4 py-3">M. Pago</th>
+                            <th class="px-4 py-3 text-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -154,7 +174,7 @@
                         <tr>
 
                             <td class="px-4 py-3 font-monospace small">
-                                #{{ $venta->ticket_number }}
+                                #{{ $venta->id }}
                             </td>
 
                             <td class="px-4 py-3 text-muted small">
@@ -188,6 +208,15 @@
                                     onclick='verTicket(@json($venta))'>
 
                                     <i class="fa-solid fa-eye"></i>
+
+                                </button>
+
+                                <button
+                                    class="btn btn-link text-success p-1"
+                                    onclick="reimprimirTicket({{ $venta->id }})"
+                                    title="Reimprimir ticket">
+
+                                    <i class="fa-solid fa-print"></i>
 
                                 </button>
 
@@ -277,8 +306,7 @@ MODAL DETALLE TICKET
                                 Ticket
                             </small>
 
-                            <div class="detail-value" id="modal_ticket">
-                                -
+                            <div id="modal_ticket" class="d-flex flex-wrap gap-2">
                             </div>
 
                         </div>
@@ -578,8 +606,23 @@ MODAL DETALLE TICKET
 
     function verTicket(venta){
 
-        document.getElementById('modal_ticket').innerText =
-            '#' + venta.ticket_number;
+        let ticketsHtml = '';
+
+        for(let i = 1; i <= venta.cantidad; i++){
+
+            const ticket = String(venta.id)
+                .padStart(6, '0') + i;
+
+            ticketsHtml += `
+                <span class="ticket-badge">
+                    <i class="fa-solid fa-ticket"></i>
+                    #${ticket}
+                </span>
+            `;
+        }
+
+        document.getElementById('modal_ticket').innerHTML =
+            ticketsHtml;
 
         document.getElementById('modal_fecha').innerText =
             new Date(venta.created_at).toLocaleString();
@@ -612,6 +655,14 @@ MODAL DETALLE TICKET
             venta.observacion ?? 'Sin observaciones';
 
         new bootstrap.Modal(document.getElementById('ticketModal')).show();
+    }
+
+    function reimprimirTicket(id)
+    {
+        window.open(
+            `/tickets/${id}/reimprimir`,
+            '_blank'
+        );
     }
 
 </script>

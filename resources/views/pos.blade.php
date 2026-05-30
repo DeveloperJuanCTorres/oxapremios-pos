@@ -36,12 +36,8 @@
 
                         <div class="d-flex gap-2">
 
-                            <button class="btn btn-light border rounded-pill px-3">
-                                <i class="fa-solid fa-chart-line me-2"></i>
-                                Reportes
-                            </button>
-
-                            <button class="btn btn-primary rounded-pill px-4">
+                            <button class="btn btn-primary rounded-pill px-4"
+                                onclick="window.location.href='{{ route('pos') }}'">
                                 <i class="fa-solid fa-ticket me-2"></i>
                                 Nueva Venta
                             </button>
@@ -51,7 +47,7 @@
                     </div>
 
                     <!-- Buscador -->
-                    <div class="mt-4 position-relative">
+                    <!-- <div class="mt-4 position-relative">
 
                         <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
 
@@ -61,7 +57,7 @@
                             placeholder="Buscar sorteo..."
                             style="height: 54px; background: #f5f7fb;">
 
-                    </div>
+                    </div> -->
 
                 </div>
 

@@ -254,10 +254,10 @@
         <!-- Table Section -->
         <div class="table-container mb-4">
             <div class="card-header bg-white p-3 border-bottom d-flex justify-content-between align-items-center">
-                <h6 class="fw-bold m-0">Recent Sales History</h6>
+                <h6 class="fw-bold m-0">Historial de ventas reciente</h6>
                 <div class="input-group input-group-sm" style="max-width: 280px;">
                     <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
-                    <input class="form-control border-start-0 ps-0 shadow-none" placeholder="Search sale ID, customer..." type="text" />
+                    <input id="searchSales" class="form-control border-start-0 ps-0 shadow-none" placeholder="Search sale ID, customer..." type="text" />
                 </div>
             </div>
             <div class="table-responsive">
@@ -273,7 +273,7 @@
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="salesTableBody">
                         @foreach($ultimosTickets as $ticket)
 
                         <tr>
@@ -455,6 +455,33 @@
         }
     );
 
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const searchInput = document.getElementById('searchSales');
+        const rows = document.querySelectorAll('#salesTableBody tr');
+
+        searchInput.addEventListener('keyup', function () {
+
+            const search = this.value.toLowerCase().trim();
+
+            rows.forEach(row => {
+
+                const text = row.textContent.toLowerCase();
+
+                if (text.includes(search)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+
+            });
+
+        });
+
+    });
 </script>
 @endsection
 

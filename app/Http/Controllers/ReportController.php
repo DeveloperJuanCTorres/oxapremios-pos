@@ -14,6 +14,11 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
+        if (!auth()->check() || auth()->user()->role_id != 3) {
+            abort(403, 'No autorizado');
+        }
+
+
         $desde = $request->desde;
         $hasta = $request->hasta;
 

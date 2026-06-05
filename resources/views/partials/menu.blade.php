@@ -18,16 +18,19 @@
             <i class="fa-solid fa-cash-register"></i>
             <span>POS</span>
         </a>
-        <a class="nav-link py-2 {{ request()->routeIs('reports') ? 'active' : '' }}" href="{{ route('reports') }}">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Reports</span>
-        </a>
+        @if(auth()->check() && auth()->user()->role_id == 3)
+            <a class="nav-link py-2 {{ request()->routeIs('reports') ? 'active' : '' }}"
+            href="{{ route('reports') }}">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Reportes</span>
+            </a>
+        @endif
     </nav>
     <div class="border-top pt-3">
-        <a class="nav-link py-2" href="#">
+        <!-- <a class="nav-link py-2" href="#">
             <i class="fa-solid fa-circle-user"></i>
             <span>Perfil</span>
-        </a>
+        </a> -->
         <a 
             class="nav-link text-danger py-2"
             href="{{ route('logout') }}"

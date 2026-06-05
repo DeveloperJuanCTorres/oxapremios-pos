@@ -32,13 +32,13 @@
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
                 <h2 class="h4 fw-bold mb-1">Dashboard</h2>
-                <p class="text-muted small mb-0">Live business performance tracking for Terminal #01</p>
+                <p class="text-muted small mb-0">Seguimiento del rendimiento empresarial en tiempo real.</p>
             </div>
-            <div class="btn-group border rounded-3 p-1 bg-white">
+            <!-- <div class="btn-group border rounded-3 p-1 bg-white">
                 <button class="btn btn-primary btn-sm px-3 rounded-2">Today</button>
                 <button class="btn btn-light btn-sm px-3 rounded-2 text-muted">Week</button>
                 <button class="btn btn-light btn-sm px-3 rounded-2 text-muted">Month</button>
-            </div>
+            </div> -->
         </div>
         <!-- KPI Row -->
         <div class="row g-4 mb-4">
@@ -160,7 +160,8 @@
                 <table class="table align-middle mb-0">
                     <thead>
                         <tr>
-                            <th class="px-4 py-3">Transacción ID</th>
+                            <th class="px-4 py-3">ID</th>
+                            <th class="px-4 py-3">Cliente</th>
                             <th class="px-4 py-3">Hora</th>
                             <th class="px-4 py-3">Total</th>
                             <th class="px-4 py-3">M. Pago</th>
@@ -176,6 +177,10 @@
                             <td class="px-4 py-3 font-monospace small">
                                 #{{ $venta->id }}
                             </td>
+
+                            <td class="px-4 py-3 font-monospace small">
+                                {{ $venta->nombres }} {{ $venta->apellidos }}
+                            </td> 
 
                             <td class="px-4 py-3 text-muted small">
                                 {{ $venta->created_at->format('H:i A') }}

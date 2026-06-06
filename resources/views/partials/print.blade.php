@@ -148,7 +148,7 @@
 
         <div class="row">
             <p style="font-weight: bold;">Fecha de sorteo:</p>
-            <p>{{ \Carbon\Carbon::parse($ticket->sorteo->date)->format('d/m/Y') }}</p>
+            <p>{{ \Carbon\Carbon::parse($ticket->sorteo->date_evento)->format('d/m/Y H:i') }}</p>
         </div>
 
         <div class="row">

@@ -141,6 +141,21 @@
             Sistema POS
         </div>
 
+        <div class="row">
+            <p style="font-weight: bold;">Sorteo:</p>
+            <p>{{ $ticket->sorteo->name }}</p>
+        </div>
+
+        <div class="row">
+            <p style="font-weight: bold;">Fecha de sorteo:</p>
+            <p>{{ \Carbon\Carbon::parse($ticket->sorteo->date)->format('d/m/Y') }}</p>
+        </div>
+
+        <div class="row">
+            <p style="font-weight: bold;">Lugar:</p>
+            <p>{{ $ticket->sorteo->lugar }}</p>
+        </div>
+
     </div>
 
     <div class="line"></div>

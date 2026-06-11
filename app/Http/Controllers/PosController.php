@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $sorteos = Raffle::where('active', 1)

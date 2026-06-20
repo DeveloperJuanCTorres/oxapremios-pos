@@ -464,6 +464,20 @@
 
                         @endforeach
 
+                        <tr class="table-primary fw-bold">
+
+                            <td colspan="7" class="text-end">
+                                TOTAL GENERAL
+                            </td>
+
+                            <td>
+                                S/ {{ number_format($totalLista,2) }}
+                            </td>
+
+                            <td></td>
+
+                        </tr>
+
                     </tbody>
                 </table>
             </div>

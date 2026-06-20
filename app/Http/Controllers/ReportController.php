@@ -145,6 +145,8 @@ class ReportController extends Controller
             ->orderBy('users.name')
             ->get();
 
+        $totalLista = (clone $baseQuery)->sum('tickets.total_pagado');
+
         return view('reportes', compact(
             'ventasTotales',
             'ticketsVendidos',
@@ -156,7 +158,8 @@ class ReportController extends Controller
             'metodosPago',
             'canalesVenta',
             'ultimosTickets',
-            'vendedores'
+            'vendedores',
+            'totalLista'
         ));
     }
 }

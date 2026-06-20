@@ -251,6 +251,135 @@
                 </div>
             </div>
         </div> -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-body">
+
+                <form method="GET">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <label class="fw-bold mb-2">
+                                Desde
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="desde"
+                                value="{{ request('desde') }}">
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label class="fw-bold mb-2">
+                                Hasta
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="hasta"
+                                value="{{ request('hasta') }}">
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label class="fw-bold mb-2">
+                                Vendedor
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="usuario">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                @foreach($vendedores as $v)
+
+                                <option
+                                    value="{{ $v->id }}"
+                                    {{ request('usuario')==$v->id ? 'selected':'' }}>
+
+                                    {{ $v->name }}
+
+                                </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label class="fw-bold mb-2">
+                                Método Pago
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="metodo">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                <option value="Yape">
+                                    Yape
+                                </option>
+
+                                <option value="Plin">
+                                    Plin
+                                </option>
+
+                                <option value="Transferencia">
+                                    Transferencia
+                                </option>
+
+                                <option value="Efectivo">
+                                    Efectivo
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+
+                        <button class="btn btn-primary">
+
+                            <i class="fa fa-search"></i>
+
+                            Buscar
+
+                        </button>
+
+                        <a
+                            href="{{ route('reports') }}"
+                            class="btn btn-secondary">
+
+                            Limpiar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
         <!-- Table Section -->
         <div class="table-container mb-4">
             <div class="card-header bg-white p-3 border-bottom d-flex justify-content-between align-items-center">
@@ -267,7 +396,9 @@
                             <th>Fecha &amp; Hora</th>
                             <th>Transacción ID</th>
                             <th>Cliente</th>
+                            <th>Vendedor</th>
                             <th>Sorteo</th>
+                            <th>Método</th>
                             <th>Cantidad</th>
                             <th>Total</th>
                             <th>Estado</th>
@@ -292,7 +423,15 @@
                             </td>
 
                             <td>
+                                {{ $ticket->vendedor }}
+                            </td>
+
+                            <td>
                                 {{ $ticket->sorteo }}
+                            </td>
+
+                            <td>
+                                {{ $ticket->metodo_pago }}
                             </td>
 
                             <td>
@@ -307,15 +446,15 @@
 
                                 @if($ticket->aprobado)
 
-                                    <span class="badge bg-success">
-                                        Aprobado
-                                    </span>
+                                <span class="badge bg-success">
+                                    Aprobado
+                                </span>
 
                                 @else
 
-                                    <span class="badge bg-danger">
-                                        Pendiente
-                                    </span>
+                                <span class="badge bg-danger">
+                                    Pendiente
+                                </span>
 
                                 @endif
 
@@ -484,7 +623,3 @@
     });
 </script>
 @endsection
-
-
-
-

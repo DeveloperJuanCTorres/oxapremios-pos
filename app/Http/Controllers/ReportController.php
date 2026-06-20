@@ -27,29 +27,56 @@ class ReportController extends Controller
 
         $desde = $request->desde;
         $hasta = $request->hasta;
+        $usuario = $request->usuario;
+        $metodo = $request->metodo;
+
+        // $tickets = DB::table('tickets')
+        //     ->leftJoin('raffles', 'raffles.id', '=', 'tickets.sorteo_id')
+        //     ->leftJoin('users', 'users.id', '=', 'tickets.created_by')
+        //     ->select(
+        //         'tickets.*',
+        //         'raffles.name as sorteo',
+        //         'users.name as vendedor'
+        //     )
+        //     ->when($desde, function ($q) use ($desde) {
+        //         $q->whereDate('tickets.created_at', '>=', $desde);
+        //     })
+        //     ->when($hasta, function ($q) use ($hasta) {
+        //         $q->whereDate('tickets.created_at', '<=', $hasta);
+        // });
 
         $tickets = DB::table('tickets')
             ->leftJoin('raffles', 'raffles.id', '=', 'tickets.sorteo_id')
-            ->leftJoin('users', 'users.id', '=', 'tickets.created_by')
+            ->leftJoin('users', 'users.id', '=', 'tickets.user_id')
             ->select(
                 'tickets.*',
                 'raffles.name as sorteo',
                 'users.name as vendedor'
             )
+
             ->when($desde, function ($q) use ($desde) {
-                $q->whereDate('tickets.created_at', '>=', $desde);
+                $q->whereDate('tickets.created_at','>=',$desde);
             })
+
             ->when($hasta, function ($q) use ($hasta) {
-                $q->whereDate('tickets.created_at', '<=', $hasta);
-            });
+                $q->whereDate('tickets.created_at','<=',$hasta);
+            })
+
+            ->when($usuario,function($q) use($usuario){
+                $q->where('tickets.user_id',$usuario);
+            })
+
+            ->when($metodo,function($q) use($metodo){
+                $q->where('tickets.metodo_pago',$metodo);
+        });
 
         $baseQuery = clone $tickets;
 
-        $ventasTotales = (clone $tickets)
+        $ventasTotales = (clone $baseQuery)
             ->where('tickets.aprobado', 1)
             ->sum('tickets.total_pagado');
 
-        $ticketsVendidos = (clone $tickets)
+        $ticketsVendidos = (clone $baseQuery)
             ->where('tickets.aprobado', 1)
             ->count();
 
@@ -107,9 +134,16 @@ class ReportController extends Controller
             ->groupBy('canal_venta')
             ->get();
 
-        $ultimosTickets = $baseQuery
+        $ultimosTickets = (clone $baseQuery)
             ->latest('tickets.id')
-            ->paginate(20);
+            ->get();
+
+        $vendedores = DB::table('users')
+            ->join('tickets', 'tickets.user_id', '=', 'users.id')
+            ->select('users.id', 'users.name')
+            ->distinct()
+            ->orderBy('users.name')
+            ->get();
 
         return view('reportes', compact(
             'ventasTotales',
@@ -121,7 +155,8 @@ class ReportController extends Controller
             'ventasPorDia',
             'metodosPago',
             'canalesVenta',
-            'ultimosTickets'
+            'ultimosTickets',
+            'vendedores'
         ));
     }
 }
